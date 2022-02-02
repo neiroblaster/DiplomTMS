@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "author")
-public class Author {
+@Table(name = "songs")
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,17 @@ public class Author {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "lyrics", length = 1500)
+    private String lyrics;
+
+    @Column(name = "link")
+    private String link;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
     @OneToMany(mappedBy ="song", cascade = CascadeType.ALL)
-    List<Line> listOfSongs;
+    List<Line> listOfLines;
 
 }
