@@ -13,7 +13,5 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
 
 //    Song findById(int id);
 //
-//    void saveOrUpdateById(int id);
-//
-//    void deleteById(int id);
+    void deleteSongById(int id);
 }

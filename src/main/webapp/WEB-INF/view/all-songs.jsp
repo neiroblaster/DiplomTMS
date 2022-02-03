@@ -16,13 +16,13 @@
 </tr>
     <c:forEach var="song" items="${allSongs}">
 
-<%--        <c:url var="deleteButton" value="/deleteSong">--%>
-<%--            <c:param name="songId" value="${song.id}"/>--%>
-<%--        </c:url>--%>
+        <c:url var="deleteButton" value="/deleteSong/${song.id}">
+            <c:param name="id" value="${song.id}"/>
+        </c:url>
 
-<%--        <c:url var="addButton" value="/addNewSong">--%>
-<%--            <c:param name="songId" value="${song.id}"/>--%>
-<%--        </c:url>--%>
+        <c:url var="addButton" value="/addNewSong">
+            <c:param name="songId" value="${song.id}"/>
+        </c:url>
 
 <%--        <c:url var="showButton" value="/showSong">--%>
 <%--            <c:param name="songId" value="${song.id}"/>--%>
@@ -33,10 +33,10 @@
             <td>${song.author.name}</td>
             <td>${song.lyrics.substring(0,3)}...</td>
 
-<%--            <td>--%>
-<%--                <input type="button" value="Delete"--%>
-<%--                       onclick="window.location.href = '${deleteButton}'"/>--%>
-<%--            </td>--%>
+            <td>
+                <input type="button" value="Delete"
+                       onclick="window.location.href = '${deleteButton}'"/>
+            </td>
 
 <%--            <td><input type="button" value="showButton"--%>
 <%--                       onclick="window.location.href = '${showButton}'"/>--%>
@@ -46,8 +46,8 @@
 </table>
 <br>
 
-<%--<input type="button" value="Add"--%>
-<%--       onclick="window.location.href = 'addNewSong'"/>--%>
+<input type="button" value="ADD"
+       onclick="window.location.href = 'addNewSong'"/>
 
 <br><br><br>
 
