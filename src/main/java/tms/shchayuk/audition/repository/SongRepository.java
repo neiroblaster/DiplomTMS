@@ -11,7 +11,7 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
 
     List<Song> findAll();
 
-//    Song findById(int id);
-//
+    Song findSongById(int id);
+
     void deleteSongById(int id);
 }

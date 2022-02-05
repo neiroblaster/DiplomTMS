@@ -24,9 +24,9 @@
             <c:param name="songId" value="${song.id}"/>
         </c:url>
 
-<%--        <c:url var="showButton" value="/showSong">--%>
-<%--            <c:param name="songId" value="${song.id}"/>--%>
-<%--        </c:url>--%>
+        <c:url var="showButton" value="/showSong/${song.id}">
+            <c:param name="id" value="${song.id}" />
+        </c:url>
 
         <tr>
             <td>${song.name}</td>
@@ -38,9 +38,9 @@
                        onclick="window.location.href = '${deleteButton}'"/>
             </td>
 
-<%--            <td><input type="button" value="showButton"--%>
-<%--                       onclick="window.location.href = '${showButton}'"/>--%>
-<%--            </td>--%>
+            <td><input type="button" value="showButton"
+                       onclick="window.location.href = '${showButton}'"/>
+            </td>
         </tr>
     </c:forEach>
 </table>
