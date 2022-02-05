@@ -24,8 +24,8 @@
             <c:param name="songId" value="${song.id}"/>
         </c:url>
 
-        <c:url var="showButton" value="/showSong/${song.id}">
-            <c:param name="id" value="${song.id}" />
+        <c:url var="showButton" value="/showSong">
+            <c:param name="songId" value="${song.id}" />
         </c:url>
 
         <tr>

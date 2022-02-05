@@ -15,6 +15,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,6 +29,12 @@ public class Strategy {
 
     @Autowired
     WordService wordService;
+
+    @Autowired
+    private AnswersFromDAO answersFromDAO;
+
+    @Autowired
+    private Answers answers;
 
 
     public List<Word> splitAndSaveWordsBySongId(int id) {
@@ -67,4 +74,39 @@ public class Strategy {
 
         return words;
     }
+
+    public List<String> doStrategy(List<Word> allWords, List<Line> allLines) {
+
+        answers.getAnswerList().clear();
+        List<String> answersFromDAOfirst = new ArrayList<>();
+        String wordToCompare = "";
+
+        for (Line curLine : allLines) {
+            Random random = new Random();
+            int randomWord = random.nextInt(curLine.getListOfWords().size()) + 1;
+            for (Word curWord : curLine.getListOfWords()) {
+                if (curWord.getWordOrder() == randomWord) {
+                    Answer answer = new Answer();
+                    answer.setRightAnswer(curWord.getWord());
+                    answer.setSongId(curLine.getSong().getId());
+                    answer.setLineId(curLine.getId());
+                    answer.setWordId(curWord.getId());
+
+                    curWord.setShowed(false);
+                    wordToCompare = curWord.getWord();
+                    curWord.setWord(null);
+                    answersFromDAOfirst.add(wordToCompare);
+
+                    answers.addOneAnswer(answer);
+                }
+            }
+        }
+        answersFromDAO.setAnswersFromDAO(answersFromDAOfirst);
+
+        return answersFromDAOfirst;
+    }
+
+
 }
+
+

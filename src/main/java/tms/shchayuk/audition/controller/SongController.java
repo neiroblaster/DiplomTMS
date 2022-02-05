@@ -10,9 +10,13 @@ import tms.shchayuk.audition.entity.Word;
 import tms.shchayuk.audition.service.interfaces.LineService;
 import tms.shchayuk.audition.service.interfaces.SongService;
 import tms.shchayuk.audition.service.interfaces.WordService;
+import tms.shchayuk.audition.utility.Answers;
+import tms.shchayuk.audition.utility.AnswersFromClient;
+import tms.shchayuk.audition.utility.AnswersFromDAO;
 import tms.shchayuk.audition.utility.Strategy;
 
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class SongController {
@@ -29,36 +33,65 @@ public class SongController {
     @Autowired
     WordService wordService;
 
+    @Autowired
+    private AnswersFromDAO answersFromDAO;
+
+    @Autowired
+    private AnswersFromClient answersFromClient;
+
+    @Autowired
+    private Answers answers;
+
     @GetMapping("/showAllSongs")
     public String showAllSongs(Model model) {
         model.addAttribute("allSongs", songService.findAll());
 
-        return "all-songs" ;
+        return "all-songs";
     }
 
     @GetMapping("/addNewSong")
     public String addNewSong(Model model) {
         Song song = new Song();
         model.addAttribute("song", song);
-        return "song-info" ;
+        return "song-info";
     }
 
     @PostMapping("/saveSong")
     public String saveSong(@ModelAttribute("song") Song song) {
         songService.saveSong(song);
         strategy.splitAndSaveWordsBySongId(song.getId());
-        return "redirect:/showAllSongs" ;
+        return "redirect:/showAllSongs";
     }
 
     @GetMapping("/deleteSong/{id}")
     public String deleteSongById(@PathVariable("id") int id) {
         songService.deleteSongById(id);
-        return "redirect:/showAllSongs" ;
+        return "redirect:/showAllSongs";
     }
 
-    @RequestMapping("/showSong/{id}")
-    public String showSong(@PathVariable ("id") int id, Model model) {
+    @GetMapping("/showSong")
+    public String showSong(@RequestParam("songId") int id, Model model) {
 
+        List<Line> allLines = lineService.findAllBySongId(id);
+        List<Integer> linesId = lineService.getLinesIdBySongId(id);
+        List<Word> allWords = wordService.getWordsBySlineId(linesId);
+
+        strategy.doStrategy(allWords, allLines);
+
+        AnswersFromClient answersFromClient = new AnswersFromClient();
+
+        model.addAttribute("allLines", allLines);
+        model.addAttribute("allWords", allWords);
+        model.addAttribute(answersFromDAO);
+        model.addAttribute(answersFromClient);
+
+        return "show-song";
+    }
+
+    @RequestMapping("/checkAnswers")
+    public String checkAnswers(@ModelAttribute AnswersFromClient answersFromClient,
+                               Model model) {
+        int id = answers.getAnswerList().get(0).getSongId();
         List<Line> allLines = lineService.findAllBySongId(id);
         List<Integer> linesId = lineService.getLinesIdBySongId(id);
         List<Word> allWords = wordService.getWordsBySlineId(linesId);
@@ -66,6 +99,17 @@ public class SongController {
         model.addAttribute("allLines", allLines);
         model.addAttribute("allWords", allWords);
 
-        return "show-song";
+        List<String> aFClient = answersFromClient.getAnswersFromClient();
+        for (int i = 0; i < aFClient.size(); i++) {
+            answers.getAnswerList().get(i).setClientAnswer(aFClient.get(i));
+            if (answers.getAnswerList().get(i).getRightAnswer().toLowerCase(Locale.ROOT).equals(aFClient.get(i).toLowerCase(Locale.ROOT))) {
+                answers.getAnswerList().get(i).setCheck(true);
+            } else {
+                answers.getAnswerList().get(i).setCheck(false);
+            }
+        }
+        model.addAttribute("answers", answers);
+
+        return "show-answers";
     }
 }
