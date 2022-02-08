@@ -8,6 +8,7 @@
 
 <h2>All Songs</h2>
 <br>
+<c:import url="header.jsp"/>
 <table>
 <tr>
     <th>Name</th>

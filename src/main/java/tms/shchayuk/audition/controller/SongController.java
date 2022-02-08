@@ -100,15 +100,18 @@ public class SongController {
         model.addAttribute("allWords", allWords);
 
         List<String> aFClient = answersFromClient.getAnswersFromClient();
+        int numberOfRightAnswers = 0;
         for (int i = 0; i < aFClient.size(); i++) {
             answers.getAnswerList().get(i).setClientAnswer(aFClient.get(i));
             if (answers.getAnswerList().get(i).getRightAnswer().toLowerCase(Locale.ROOT).equals(aFClient.get(i).toLowerCase(Locale.ROOT))) {
                 answers.getAnswerList().get(i).setCheck(true);
+                numberOfRightAnswers++;
             } else {
                 answers.getAnswerList().get(i).setCheck(false);
             }
         }
         model.addAttribute("answers", answers);
+        model.addAttribute("numberOfRightAnswers", numberOfRightAnswers);
 
         return "show-answers";
     }

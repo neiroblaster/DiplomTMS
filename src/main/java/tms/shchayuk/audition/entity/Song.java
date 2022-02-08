@@ -22,10 +22,10 @@ public class Song {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "lyrics", length = 1500)
+    @Column(name = "lyrics", length = 10000)
     private String lyrics;
 
-    @Column(name = "link")
+    @Column(name = "link", length = 1000)
     private String link;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -2,6 +2,23 @@
 <%@ page isELIgnored="false" %>
 <!doctype html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <style>
+        .progress-bar {
+            color: rgb(29, 27, 27);
+            background-color: rgb(49, 241, 32);
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
 <body>
 <h2>${allLines.get(0).song.author.name} - ${allLines.get(0).song.name}</h2>
 
@@ -10,6 +27,12 @@
 </div>
 
 <h2>Lyrics</h2>
+<br><br>
+<c:set var="numberOfRightAnswers" scope="request" value="${numberOfRightAnswers}"/>
+<div class="progress"  style="height: 30px; width: 800px; margin: 5px; border-radius: 10px;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated"
+         role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%">25%</div>
+</div>
 
 <br>
 <c:forEach var="line" items="${allLines}">
