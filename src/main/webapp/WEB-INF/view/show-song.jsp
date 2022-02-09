@@ -30,7 +30,7 @@
 
 <div class="container">
     <div class="row justify-content-start">
-        <c:import url="header.jsp"/>
+                <c:import url="header.jsp"/>
     </div>
 </div>
 <div class="container">
@@ -54,7 +54,7 @@
                         <c:if test="${word.sline.id == line.id}">
                             <span>${word.word}</span>
                             <c:if test="${word.showed eq false}">
-                                <form:input path="answersFromClient" autocomplete = "off"/>
+                                <form:input path="answersFromClient" />
                             </c:if>
                         </c:if>
                     </c:forEach>

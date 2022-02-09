@@ -12,10 +12,7 @@ import tms.shchayuk.audition.service.interfaces.LineService;
 import tms.shchayuk.audition.service.interfaces.WordService;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -104,6 +101,18 @@ public class Strategy {
         answersFromDAO.setAnswersFromDAO(answersFromDAOfirst);
 
         return answersFromDAOfirst;
+    }
+
+    public void compareAnswers(List<String> aFClient){
+        for (int i = 0; i < aFClient.size(); i++) {
+            answers.getAnswerList().get(i).setClientAnswer(aFClient.get(i));
+            if (answers.getAnswerList().get(i).getRightAnswer()
+                    .toLowerCase(Locale.ROOT).equals(aFClient.get(i).toLowerCase(Locale.ROOT))) {
+                answers.getAnswerList().get(i).setCheck(true);
+            } else {
+                answers.getAnswerList().get(i).setCheck(false);
+            }
+        }
     }
 
 

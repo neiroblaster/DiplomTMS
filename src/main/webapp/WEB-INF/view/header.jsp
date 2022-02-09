@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a href="${pageContext.request.contextPath}/showAllSongs" class="navbar-brand">Home</a>
+        <a href="/showAllSongs" class="navbar-brand">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                 aria-controls="navbarContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto mb-2">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/showAllAuthors" class="nav-link">AUTHORS</a>
+                    <a href="/showAllAuthors" class="nav-link">AUTHORS</a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">bla</a>

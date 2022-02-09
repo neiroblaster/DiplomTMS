@@ -16,7 +16,6 @@
             font-size: 20px;
             border-radius: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -28,7 +27,6 @@
 
 <h2>Lyrics</h2>
 <br><br>
-<c:set var="numberOfRightAnswers" scope="request" value="${numberOfRightAnswers}"/>
 <div class="progress"  style="height: 30px; width: 800px; margin: 5px; border-radius: 10px;">
     <div class="progress-bar progress-bar-striped progress-bar-animated"
          role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%">25%</div>
