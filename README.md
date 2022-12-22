@@ -1,8 +1,6 @@
 # Audition
 ## Environment: 
-
-***Spring Boot, Spring MVC, Spring Data JPA,
-Hibernate, MySQL, Maven, JSTL, Bootstrap, and CSS.***
+### Spring Boot, Spring MVC, Spring Data JPA, Hibernate, MySQL, Maven, JSTL, Bootstrap, and CSS.
 
 ___
 <h3>
