@@ -8,10 +8,10 @@ ___
 + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Audition</b> then dynamically removes different words from the song so that you could <b>fill in the gaps</b> accordingly. 
 </br>
 
-![Image1](images/Audition%201.png)
+![Image1](images/Audition1.png)
 
 + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that, it <b>checks your answers</b> and provides you with the correct options in case there are any mistakes.
 </br>
 
-![Image1](images/Audition%202.png)
+![Image1](images/Audition2.png)
 
