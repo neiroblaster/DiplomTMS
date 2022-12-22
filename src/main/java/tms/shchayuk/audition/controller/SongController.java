@@ -10,10 +10,7 @@ import tms.shchayuk.audition.entity.Word;
 import tms.shchayuk.audition.service.interfaces.LineService;
 import tms.shchayuk.audition.service.interfaces.SongService;
 import tms.shchayuk.audition.service.interfaces.WordService;
-import tms.shchayuk.audition.utility.Answers;
-import tms.shchayuk.audition.utility.AnswersFromClient;
-import tms.shchayuk.audition.utility.AnswersFromDAO;
-import tms.shchayuk.audition.utility.Strategy;
+import tms.shchayuk.audition.utility.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -97,8 +94,9 @@ public class SongController {
         model.addAttribute("allWords", allWords);
 
         List<String> aFClient = answersFromClient.getAnswersFromClient();
-        strategy.compareAnswers(aFClient);
+        Result result = strategy.compareAnswers(aFClient);
         model.addAttribute("answers", answers);
+        model.addAttribute("result", result);
 
         return "show-answers";
     }

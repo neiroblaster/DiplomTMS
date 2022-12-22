@@ -13,74 +13,83 @@
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <style>
-        .one {
-            margin-top: 56px;
-        }
 
-        .two {
-            margin-top: 56px;
+        body {
+            background-color: #f1f1f1;
+            color: #0f141e;
         }
 
         .container-fluid {
             font-size: 120%;
         }
+
+        .youtube-link {
+            position: fixed;
+            margin-top: 75px;
+            margin-left: 30px;
+        }
+
+        .btn-check-position {
+            position: fixed;
+            right: 30px;
+            top: 80px;
+        }
+
+        /*@media (max-width: 500px) {*/
+        /*    .row .col-lg-6 {*/
+        /*        top: 300px;*/
+        /*    }*/
+        /*}*/
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="row justify-content-start">
-                <c:import url="header.jsp"/>
-    </div>
-</div>
-<div class="container">
-    <h2>${allLines.get(0).song.author.name} - ${allLines.get(0).song.name}</h2>
-</div>
 <div class="container-fluid">
-    <div class="row justify-content-space-between">
-        <div class="col-lg-6 offset-lg-6 one" style="margin-top: 75px">
-            <h2>Lyrics</h2>
-            <br>
-            <form:form action="checkAnswers" modelAttribute="answersFromClient">
-                <c:forEach var="line" items="${allLines}">
-                    <c:url var="checkButton" value="/checkAnswers">
-                        <c:param name="songId" value="${line.song.id}"/>
-                    </c:url>
-                    <c:url var="showButton" value="/showSong">
-                        <c:param name="songId" value="${line.song.id}"/>
-                    </c:url>
-                    <br>
-                    <c:forEach var="word" items="${allWords}">
-                        <c:if test="${word.sline.id == line.id}">
-                            <span>${word.word}</span>
-                            <c:if test="${word.showed eq false}">
-                                <form:input path="answersFromClient" />
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
-                </c:forEach>
-
-                <br><br>
-                <input type="submit" value="CHECK ANSWERS"/>
-            </form:form>
-
-            <br>
-            <input type="button" value="CHANGE WORDS" onclick="window.location.href = '${showButton}'"/>
-        </div>
-        <div class="col-lg-6 col-2 fixed-top two" style="margin-top: 75px">
-            <span>
-                <p>
-                    ${allLines.get(0).song.link}
-                </p>
-            </span>
-        </div>
+    <div class="row justify-content-start">
+        <c:import url="header.jsp"/>
+    </div>
+    <div class="youtube-link">
+        ${allLines.get(0).song.link}
     </div>
 </div>
-<div><c:forEach var="answersFromDAO" items="${answersFromDAO.answersFromDAO}">
-    <div hidden>
-            ${answersFromDAO}
+<div class="row justify-content-space-between">
+    <div class="col-lg-6 offset-lg-6" style="margin-top: 75px">
+        <h2>${allLines.get(0).song.author.name} - ${allLines.get(0).song.name}</h2>
+        <br>
+        <form:form action="checkAnswers" modelAttribute="answersFromClient">
+            <c:forEach var="line" items="${allLines}">
+                <c:url var="checkButton" value="/checkAnswers">
+                    <c:param name="songId" value="${line.song.id}"/>
+                </c:url>
+                <c:url var="showButton" value="/showSong">
+                    <c:param name="songId" value="${line.song.id}"/>
+                </c:url>
+                <br>
+                <c:forEach var="word" items="${allWords}">
+                    <c:if test="${word.sline.id == line.id}">
+                        <span>${word.word}</span>
+                        <c:if test="${word.showed eq false}">
+                            <form:input path="answersFromClient"/>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+            <div class="btn-check-position">
+                <input type="submit" value="CHECK ANSWERS"/>
+            </div>
+        </form:form>
+
+        <br>
+        <input type="button" value="CHANGE WORDS" onclick="window.location.href = '${showButton}'"/>
     </div>
-</c:forEach></div>
+</div>
+
+<%--<div><c:forEach var="answersFromDAO" items="${answersFromDAO.answersFromDAO}">--%>
+<%--    <div hidden>--%>
+<%--            ${answersFromDAO}--%>
+<%--    </div>--%>
+<%--</c:forEach></div>--%>
 
 </body>
 

@@ -40,8 +40,7 @@ public class Strategy {
         List<Line> lines = new ArrayList<>();
         Line line;
         for (String savedLine : createdLines) {
-            if (!savedLine.equals(""))
-            {
+            if (!savedLine.equals("")) {
                 line = new Line();
                 line.setStext(savedLine);
                 lines.add(line);
@@ -103,19 +102,42 @@ public class Strategy {
         return answersFromDAOfirst;
     }
 
-    public void compareAnswers(List<String> aFClient){
+    public Result compareAnswers(List<String> aFClient) {
+        int countRightAnswers = 0;
+        Result result = new Result();
         for (int i = 0; i < aFClient.size(); i++) {
             answers.getAnswerList().get(i).setClientAnswer(aFClient.get(i));
             if (answers.getAnswerList().get(i).getRightAnswer()
                     .toLowerCase(Locale.ROOT).equals(aFClient.get(i).toLowerCase(Locale.ROOT))) {
                 answers.getAnswerList().get(i).setCheck(true);
+                countRightAnswers++;
             } else {
                 answers.getAnswerList().get(i).setCheck(false);
             }
         }
+
+        int percent = countRightAnswers * 100 / aFClient.size();
+
+        result.setNumberOfAllWords(aFClient.size());
+        result.setNumberOfRightAnswers(countRightAnswers);
+        result.setPercent(percent);
+
+        if (percent < 10) {
+            result.setWidth(10);
+        } else {
+            result.setWidth(percent);
+        }
+
+        if (percent < 30) {
+            result.setColor("red");
+        } else if (percent < 60) {
+            result.setColor("orange");
+        } else {
+            result.setColor("limegreen");
+        }
+
+        return result;
     }
-
-
 
 }
 
