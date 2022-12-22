@@ -4,7 +4,6 @@
 
 ___
 <h3>
-<i>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The goal of this project is that non-native speakers should <b>learn English</b> by listening to their favorite songs by adding the link from YouTube alongside the lyrics of the chosen song.
 </h3>
 
@@ -19,4 +18,4 @@ ___
 </h3>
 
 ![Image1](images/Audition%202.png)
-</i>
+
